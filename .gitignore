@@ -1,0 +1,3 @@
+# We actually don't want to track the generated JS library.
+# This way we can fill it with calls to console.debug() and then just compile them out on the next pass.
+lib/
