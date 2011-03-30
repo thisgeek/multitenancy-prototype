@@ -9,10 +9,11 @@ Currently, the stack in use includes [CouchDB](http://couchdb.apache.org/), [Nod
 ## Quick Start
 
 ### Get the dependencies you don't already have.
+
 * Clone this repository with `git clone`. It includes git submodules pointing to coffee-script, jasmine-node, and nave (see below).
 * [Install CouchDB](http://wiki.apache.org/couchdb/Installation)
 * [Install Node.js](https://github.com/joyent/node) `version >= 0.4.2`
-    Using *nave* the virtual Node.js environment, is recommended. It is just a simple bash script which you can find in this repository at `third_party/nave`. Just copy `nave.sh` to somplace on your $PATH for easy access to any version of Node.js at your fingertips.
+    Using *nave* the virtual Node.js environment, is recommended. It is just a simple bash script which you can find in this repository at `third_party/nave`. Just copy `nave.sh` to someplace on your `$PATH` for easy access to any version of Node.js at your fingertips.
 * Initialize the project with:
 
     cd multitenancy-prototype
