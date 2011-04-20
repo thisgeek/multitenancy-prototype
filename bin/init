@@ -4,26 +4,43 @@ DIRECTORY=$(cd `dirname $0` && pwd)
 ROOT=$(dirname $DIRECTORY)
 COFFEE_BIN=third_party/coffee-script/bin
 
+if [ $(pwd) != $ROOT ]; then
+    echo 'You must be in the project directory for this command to work'
+    exit 1
+fi
+
 echo_out ()
 {
-    echo "init says '$1'"
+    echo "init says: '$1'"
 }
 
-cd $ROOT
+check_status ()
+{
+    if [ $? != 0 ]; then
+        exit $?
+    fi
+}
+
 echo_out 'initializing git submodules'
+
 git submodule init
+check_status
+
 git submodule update
+check_status
+
 echo_out 'done initializing git submodules'
 
-cd $DIRECTORY
-if ! [ -f coffee ]; then
+if ! [ -f $DIRECTORY/coffee ]; then
     echo_out 'creating symlink to coffee'
-    ln -s ../$COFFEE_BIN/coffee
+    ln -s $ROOT/$COFFEE_BIN/coffee $DIRECTORY/coffee
 fi
-if ! [ -f cake ]; then
+check_status
+
+if ! [ -f $DIRECTORY/cake ]; then
     echo_out 'creating symlink to cake'
-    ln -s ../$COFFEE_BIN/cake
+    ln -s $ROOT/$COFFEE_BIN/cake $DIRECTORY/cake
 fi
-cd $ROOT
+check_status
 
 echo_out 'ok'
