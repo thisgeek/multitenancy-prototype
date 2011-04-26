@@ -2,5 +2,5 @@
     "name": "multitenancy-prototype",
     "version": "0.0.0a",
     "description": "Protyping a technology stack for a multenancy server cluster.",
-    "engines": ["node 0.4.4"]
+    "engines": ["node 0.4.7"]
 }
