@@ -1,3 +1,25 @@
-# We actually don't want to track the generated JS library.
-# This way we can fill it with calls to console.debug() and then just compile them out on the next pass.
-lib/
+# ! JS files are not tracked
+*.js
+
+# Ignore TextMate project files
+*.tmproj
+
+# Ignore Mac OS metadata files
+.DS_Store
+
+# Ignore Mac OS X extended file attribute files
+._*
+._*/
+
+# Ignore Vim .swp files and temp backups
+*.swp
+*~
+
+# Emacs tags files
+TAGS
+*.tags
+
+# local bin links
+bin/cake
+bin/coffee
+bin/nave
