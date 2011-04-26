@@ -1,29 +1,56 @@
 #!/bin/bash
 
-DIRECTORY=$(cd `dirname $0` && pwd)
-ROOT=$(dirname $DIRECTORY)
+LOCAL_BIN=$(cd `dirname $0` && pwd)
+ROOT=$(dirname $LOCAL_BIN)
 COFFEE_BIN=third_party/coffee-script/bin
+NAVE_BIN=third_party/nave
+
+if [ $(pwd) != $ROOT ]; then
+    echo 'You must be in the project directory for this command to work'
+    exit 1
+fi
 
 echo_out ()
 {
-    echo "init says '$1'"
+    echo "init says: '$1'"
 }
 
-cd $ROOT
-echo_out 'initializing git submodules'
-git submodule init
-git submodule update
-echo_out 'done initializing git submodules'
+check_status ()
+{
+    if [ $? != 0 ]; then
+        exit $?
+    fi
+}
 
-cd $DIRECTORY
-if ! [ -f coffee ]; then
+echo_out 'initializing git submodules'
+
+git submodule init
+check_status
+
+echo_out 'updating git submodules'
+
+git submodule update
+git submodule foreach --recursive git pull
+check_status
+
+echo_out 'done initializing and updating git submodules'
+
+if ! [ -f $LOCAL_BIN/coffee ]; then
     echo_out 'creating symlink to coffee'
-    ln -s ../$COFFEE_BIN/coffee
+    ln -s $ROOT/$COFFEE_BIN/coffee $LOCAL_BIN/coffee
 fi
-if ! [ -f cake ]; then
+check_status
+
+if ! [ -f $LOCAL_BIN/cake ]; then
     echo_out 'creating symlink to cake'
-    ln -s ../$COFFEE_BIN/cake
+    ln -s $ROOT/$COFFEE_BIN/cake $LOCAL_BIN/cake
 fi
-cd $ROOT
+check_status
+
+if ! [ -f $LOCAL_BIN/nave ]; then
+    echo_out 'creating symlink to nave'
+    ln -s $ROOT/$NAVE_BIN/nave.sh $LOCAL_BIN/nave
+fi
+check_status
 
 echo_out 'ok'
