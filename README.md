@@ -47,12 +47,19 @@ And run the tests with
     bin/cake test
 
 ### Update the repository
-Your git repository should be periodically updated with
+Your git repository may be periodically updated with
 
     bin/cake update
 
 This will pull the latest remote changes from the git submodule repositories
 and reconfigure this repository for them.
+
+*Warning!* Updating your repository can cause things to break because it pulls
+in the latest changes from all the dependency submodules. Dependency projects
+like to change the way things work and when these changes are pulled into your
+repo it will likely cause you pain. So...
+
+__Don't do `bin/cake update` on your master branch.__
 
 ### .gitignore
 ! Note that JS files (`*.js`) are *not* tracked, since all JS source code is
