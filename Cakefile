@@ -34,7 +34,8 @@ task 'test', 'run the full spec test suite', ->
         failures = runner.results().failedCount
         if failures then process.exit 1 else process.exit 0
 
-    jasmine.executeSpecsInFolder specPath, afterSpecRun, verbose, colored
+    pattern = new RegExp "spec\.(js|coffee)$", "i"
+    jasmine.executeSpecsInFolder specPath, afterSpecRun, verbose, colored, pattern
 
 task 'update', 'update the project repository', ->
     checkAndRemoveFile './bin/cake'
